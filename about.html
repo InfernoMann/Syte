@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .neon-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.05) 10%,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.05) 30%,
+                transparent 50%
+            );
+            background-size: 200px 200px;
+            animation: shift 5s linear infinite;
+            z-index: -1;
+        }
+
+        .line {
+            position: absolute;
+            background: #fff;
+            box-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px rgba(255, 255, 255, 0.8);
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        .line-horizontal-1 {
+            width: 100%;
+            height: 2px;
+            top: 20%;
+            left: 0;
+        }
+
+        .line-horizontal-2 {
+            width: 100%;
+            height: 2px;
+            top: 80%;
+            left: 0;
+        }
+
+        .line-vertical-1 {
+            width: 2px;
+            height: 100%;
+            left: 20%;
+            top: 0;
+        }
+
+        .line-vertical-2 {
+            width: 2px;
+            height: 100%;
+            left: 80%;
+            top: 0;
+        }
+
+        .neon-text {
+            font-size: 4rem;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #0ff,
+                0 0 30px #0ff;
+            animation: glow 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes flicker {
+            0%, 100% {
+                box-shadow: 
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 20px rgba(255, 255, 255, 0.8);
+            }
+            50% {
+                box-shadow: 
+                    0 0 3px #fff,
+                    0 0 7px #fff,
+                    0 0 15px rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        @keyframes shift {
+            0% { background-position: 0 0; }
+            100% { background-position: 200px 200px; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 20px #0ff,
+                    0 0 30px #0ff;
+            }
+            100% { text-shadow: 
+                    0 0 10px #fff,
+                    0 0 20px #fff,
+                    0 0 40px #0ff,
+                    0 0 60px #0ff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-lines"></div>
+    <div class="line line-horizontal-1"></div>
+    <div class="line line-horizontal-2"></div>
+    <div class="line line-vertical-1"></div>
+    <div class="line line-vertical-2"></div>
+    <div class="neon-text">About Us! i say not started...</div>
+</body>
+</html>
