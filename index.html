@@ -11,9 +11,6 @@
             background: #000;
             overflow: hidden;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             font-family: 'Arial', sans-serif;
         }
 
@@ -71,6 +68,12 @@
             top: 0;
         }
 
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
         .neon-text {
             font-size: 4rem;
             color: #fff;
@@ -82,7 +85,46 @@
                 0 0 20px #0ff,
                 0 0 30px #0ff;
             animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .neon-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 1.5rem;
+            color: #fff;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
+            border: 2px solid #0ff;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            text-shadow: 
+                0 0 5px #0ff,
+                0 0 10px #0ff,
+                0 0 20px #0ff;
+            box-shadow: inset 0 0 10px #0ff, 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff;
+            animation: button-glow 1.5s ease-in-out infinite alternate;
+            text-decoration: none;
             z-index: 1;
+        }
+
+        .neon-button:hover {
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            box-shadow: inset 0 0 15px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 25px #0ff;
+        }
+
+        .nav-link {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #ecf0f1;
+            text-decoration: none;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-link:hover {
+            color: #bdc3c7;
         }
 
         @keyframes flicker {
@@ -119,6 +161,11 @@
                     0 0 60px #0ff;
             }
         }
+
+        @keyframes button-glow {
+            0% { box-shadow: inset 0 0 10px #0ff, 0 0 5px #0ff, 0 0 10px #0ff, 0 0 15px #0ff; }
+            100% { box-shadow: inset 0 0 20px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; }
+        }
     </style>
 </head>
 <body>
@@ -127,6 +174,10 @@
     <div class="line line-horizontal-2"></div>
     <div class="line line-vertical-1"></div>
     <div class="line line-vertical-2"></div>
-    <div class="neon-text">Roblox&scripts not finished yet! Soon...</div>
+    <div class="container">
+        <div class="neon-text">Roblox&Scripts starting soon!...</div>
+        <a href="about.html" class="nav-link">About Us</a>
+    </div>
+    <a href="https://chromedino.com/" class="neon-button">Play Dinosaur</a>
 </body>
 </html>
