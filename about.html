@@ -71,18 +71,34 @@
             top: 0;
         }
 
-        .neon-text {
-            font-size: 4rem;
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .neon-header {
+            font-size: 2rem;
             color: #fff;
             text-transform: uppercase;
             font-weight: bold;
             text-shadow: 
                 0 0 5px #fff,
-                0 0 10px #fff,
+                0 0 10px #0ff,
                 0 0 20px #0ff,
                 0 0 30px #0ff;
             animation: glow 2s ease-in-out infinite alternate;
-            z-index: 1;
+            margin-bottom: 20px;
+        }
+
+        .neon-credits {
+            font-size: 1.2rem;
+            color: #fff;
+            text-shadow: 
+                0 0 3px #fff,
+                0 0 7px #0ff,
+                0 0 15px #0ff;
+            animation: credits-glow 2s ease-in-out infinite alternate;
         }
 
         @keyframes flicker {
@@ -108,15 +124,28 @@
         @keyframes glow {
             0% { text-shadow: 
                     0 0 5px #fff,
-                    0 0 10px #fff,
+                    0 0 10px #0ff,
                     0 0 20px #0ff,
                     0 0 30px #0ff;
             }
             100% { text-shadow: 
                     0 0 10px #fff,
-                    0 0 20px #fff,
+                    0 0 20px #0ff,
                     0 0 40px #0ff,
                     0 0 60px #0ff;
+            }
+        }
+
+        @keyframes credits-glow {
+            0% { text-shadow: 
+                    0 0 3px #fff,
+                    0 0 7px #0ff,
+                    0 0 15px #0ff;
+            }
+            100% { text-shadow: 
+                    0 0 6px #fff,
+                    0 0 14px #0ff,
+                    0 0 30px #0ff;
             }
         }
     </style>
@@ -127,6 +156,9 @@
     <div class="line line-horizontal-2"></div>
     <div class="line line-vertical-1"></div>
     <div class="line line-vertical-2"></div>
-    <div class="neon-text">About Us! i say not started...</div>
+    <div class="container">
+        <div class="neon-header">About Us</div>
+        <div class="neon-credits">Credits to Robert<br>We working 24/7</div>
+    </div>
 </body>
 </html>
