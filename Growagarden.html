@@ -8,125 +8,125 @@
         body {
             margin: 0;
             height: 100vh;
-            background: #000;
+            background: radial-gradient(circle, #000 0%, #001f1f 100%);
             overflow: hidden;
             position: relative;
             font-family: 'Arial', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+        }
+
+        .particle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #00ffff;
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            opacity: 0.7;
+            box-shadow: 0 0 10px #00ffff;
         }
 
         .neon-lines {
             position: absolute;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                45deg,
-                rgba(0, 255, 255, 0.05) 10%,
-                rgba(0, 255, 255, 0.2) 20%,
-                rgba(0, 255, 255, 0.05) 30%,
-                transparent 50%
-            );
-            background-size: 200px 200px;
-            animation: shift 5s linear infinite;
+            background: linear-gradient(45deg, rgba(0, 255, 255, 0.1) 0%, transparent 70%);
             z-index: -1;
         }
 
         .neon-title {
-            font-size: 4rem;
+            font-size: 4.5rem;
             color: #00ffff;
             text-transform: uppercase;
             font-weight: bold;
-            text-shadow: 
-                0 0 10px #00ffff,
-                0 0 20px #00ffff,
-                0 0 30px #00ffff;
-            animation: title-glow 2s ease-in-out infinite alternate;
-            margin-top: 20px;
-            z-index: 1;
-        }
-
-        .script-container {
-            margin-top: 40px;
-            text-align: center;
+            text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 40px #00ffff;
+            animation: text-glow 2s ease-in-out infinite alternate;
+            margin-bottom: 20px;
             z-index: 1;
         }
 
         .script-text {
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             color: #00ffff;
-            text-shadow: 
-                0 0 5px #00ffff,
-                0 0 10px #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+            text-align: center;
             margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 12px;
             word-wrap: break-word;
-            max-width: 600px;
+            max-width: 80%;
+            box-shadow: 0 0 15px #00ffff;
         }
 
-        .copy-button {
-            padding: 10px 20px;
-            font-size: 1.2rem;
+        .neon-button {
+            padding: 12px 25px;
+            font-size: 1.3rem;
             color: #fff;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
-            border: 2px solid #00ffff;
-            border-radius: 5px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            border: 3px solid #00ffff;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            text-shadow: 
-                0 0 5px #00ffff,
-                0 0 10px #00ffff;
-            box-shadow: inset 0 0 10px #00ffff, 0 0 5px #00ffff, 0 0 10px #00ffff;
+            text-shadow: 0 0 8px #00ffff;
+            box-shadow: inset 0 0 15px #00ffff, 0 0 8px #00ffff;
             animation: button-glow 1.5s ease-in-out infinite alternate;
             text-decoration: none;
+            transition: transform 0.2s;
         }
 
-        .copy-button:hover {
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
-            box-shadow: inset 0 0 15px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+        .neon-button:hover {
+            transform: scale(1.05);
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.4) 0%, transparent 70%);
+            box-shadow: inset 0 0 20px #00ffff, 0 0 12px #00ffff;
         }
 
-        @keyframes shift {
-            0% { background-position: 0 0; }
-            100% { background-position: 200px 200px; }
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-50px) translateX(30px); }
+            100% { transform: translateY(0) translateX(0); }
         }
 
-        @keyframes title-glow {
-            0% { text-shadow: 
-                    0 0 10px #00ffff,
-                    0 0 20px #00ffff,
-                    0 0 30px #00ffff;
-            }
-            100% { text-shadow: 
-                    0 0 20px #00ffff,
-                    0 0 40px #00ffff,
-                    0 0 60px #00ffff;
-            }
+        @keyframes text-glow {
+            0% { text-shadow: 0 0 15px #00ffff, 0 0 25px #00ffff, 0 0 40px #00ffff; }
+            100% { text-shadow: 0 0 20px #00ffff, 0 0 35px #00ffff, 0 0 60px #00ffff; }
         }
 
         @keyframes button-glow {
-            0% { box-shadow: inset 0 0 10px #00ffff, 0 0 5px #00ffff, 0 0 10px #00ffff; }
-            100% { box-shadow: inset 0 0 20px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff; }
+            0% { box-shadow: inset 0 0 15px #00ffff, 0 0 8px #00ffff; }
+            100% { box-shadow: inset 0 0 20px #00ffff, 0 0 12px #00ffff; }
         }
     </style>
+    <script>
+        function createParticles(count) {
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                document.body.appendChild(particle);
+            }
+        }
+        function copyToClipboard() {
+            const scriptText = 'loadstring(game:HttpGet(('https://raw.githubusercontent.com/nootmaus/GrowAgarden/refs/heads/main/mauscripts'),true))()';
+            navigator.clipboard.writeText(scriptText).then(() => {
+                alert('Script copied to clipboard!');
+            }).catch(err => {
+                alert('Failed to copy script: ' + err);
+            });
+        }
+        window.onload = () => createParticles(50);
+    </script>
 </head>
 <body>
     <div class="neon-lines"></div>
     <div class="neon-title">Grow A Garden</div>
-    <div class="script-container">
-        <div class="script-text">loadstring(game:HttpGet(('https://raw.githubusercontent.com/nootmaus/GrowAgarden/refs/heads/main/mauscripts'),true))()
-"))()</div>
-        <button class="copy-button" onclick="copyToClipboard()">Copy Script</button>
-    </div>
-    <script>
-        function copyToClipboard() {
-            const scriptText = "loadstring(game:HttpGet(('https://raw.githubusercontent.com/nootmaus/GrowAgarden/refs/heads/main/mauscripts'),true))()";
-            navigator.clipboard.writeText(scriptText).then(() => {
-                alert("Script copied to clipboard!");
-            }).catch(err => {
-                console.error("Failed to copy text: ", err);
-            });
-        }
-    </script>
+    <div class="script-text">loadstring(game:HttpGet(('https://raw.githubusercontent.com/nootmaus/GrowAgarden/refs/heads/main/mauscripts'),true))()
+</div>
+    <button class="neon-button" onclick="copyToClipboard()">Copy Script</button>
 </body>
 </html>
