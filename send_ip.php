@@ -52,4 +52,3 @@ $mailSent = mail($to, $subject, $message, $headers);
 http_response_code(200);
 exit;
 ?>
-
