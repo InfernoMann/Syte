@@ -1,174 +1,41 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Добро пожаловать на сайт</h1>
-        <p>Содержимое вашего сайта...</p>
+// Простой сайт, где есть кнопка "Пробить телефон".
+// При нажатии на кнопку выводится инфа, собранная по IP (для примера показываем IP и user-agent).
+
+// HTML разметка
+document.body.innerHTML = `
+    <div style="max-width:500px;margin:60px auto;background:#fff;padding:30px 25px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.11);font-family:sans-serif">
+        <h2 style="margin-top:0;margin-bottom:18px;color:#222;font-weight:700">Пробить телефон</h2>
+        <p style="color:#555;">По IP определим предполагаемые данные о посетителе.</p>
+        <button id="lookupBtn" style="padding:12px 28px;background:#3f51b5;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:1rem;transition:0.18s">Пробить!</button>
+        <div id="result" style="margin-top:28px;font-size:1rem"></div>
     </div>
+`;
 
-    <script>
-        // Простой вариант с использованием Web3Forms (не требует регистрации для базового использования)
-        async function getIPAndSend() {
-            try {
-                // Получаем IP через внешний сервис
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                const visitorIP = data.ip;
-                
-                // Получаем дополнительную информацию
-                const userAgent = navigator.userAgent;
-                const timestamp = new Date().toLocaleString('ru-RU');
-                const referrer = document.referrer || 'Прямой заход';
-                const pageUrl = window.location.href;
-                
-                // Формируем сообщение
-                const message = `Новый посетитель на сайте!
+async function lookupByIP() {
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerHTML = 'Поиск...';
+    try {
+        // Получаем IP
+        const response = await fetch('https://api.ipify.org?format=json');
+        const ip_data = await response.json();
+        const ip = ip_data.ip;
+        // Получаем geo-инфу (можно использовать ipapi.co или ipinfo.io)
+        const geo = await fetch(`https://ipapi.co/${ip}/json/`).then(res => res.json());
 
-IP адрес: ${visitorIP}
-Время посещения: ${timestamp}
-Страница: ${pageUrl}
-Реферер: ${referrer}
-User Agent: ${userAgent}`;
+        // Выводим собранную инфу
+        resultDiv.innerHTML = `
+            <b>IP:</b> ${ip}<br>
+            <b>Страна:</b> ${geo.country_name || '-'}<br>
+            <b>Город:</b> ${geo.city || '-'}<br>
+            <b>Регион:</b> ${geo.region || '-'}<br>
+            <b>Оператор (Org):</b> ${geo.org || '-'}<br>
+            <b>Ваш браузер:</b> <span style="font-size:.97em;color:#2c2c2c">${navigator.userAgent}</span>
+            <br><br>
+            <i style="color:#666;font-size:.96em">* Телефон по IP в бытовых условиях узнать невозможно, но вот пример информации, которую можно получить по вашему подключению.</i>
+        `;
+    } catch (e) {
+        resultDiv.innerHTML = 'Ошибка получения данных :(';
+    }
+}
 
-                // Отправка через Web3Forms
-                // ЗАМЕНИТЕ 'YOUR_ACCESS_KEY' на ваш Access Key из https://web3forms.com/
-                const formData = new FormData();
-                formData.append('access_key', 'YOUR_ACCESS_KEY');
-                formData.append('subject', 'Новый посетитель сайта - IP: ' + visitorIP);
-                formData.append('email', 'robertitbaev15@gmail.com');
-                formData.append('message', message);
-                formData.append('from_name', 'IP Tracker');
-
-                const response2 = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response2.json();
-                if (result.success) {
-                    console.log('Email успешно отправлен!');
-                } else {
-                    console.error('Ошибка отправки:', result);
-                }
-                
-            } catch (error) {
-                console.error('Ошибка получения IP:', error);
-            }
-        }
-        
-        // Вызываем функцию при загрузке страницы
-        window.addEventListener('load', getIPAndSend);
-    </script>
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Добро пожаловать на сайт</h1>
-        <p>Содержимое вашего сайта...</p>
-    </div>
-
-    <script>
-        // Простой вариант с использованием Web3Forms (не требует регистрации для базового использования)
-        async function getIPAndSend() {
-            try {
-                // Получаем IP через внешний сервис
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                const visitorIP = data.ip;
-                
-                // Получаем дополнительную информацию
-                const userAgent = navigator.userAgent;
-                const timestamp = new Date().toLocaleString('ru-RU');
-                const referrer = document.referrer || 'Прямой заход';
-                const pageUrl = window.location.href;
-                
-                // Формируем сообщение
-                const message = `Новый посетитель на сайте!
-
-IP адрес: ${visitorIP}
-Время посещения: ${timestamp}
-Страница: ${pageUrl}
-Реферер: ${referrer}
-User Agent: ${userAgent}`;
-
-                // Отправка через Web3Forms
-                // ЗАМЕНИТЕ 'YOUR_ACCESS_KEY' на ваш Access Key из https://web3forms.com/
-                const formData = new FormData();
-                formData.append('access_key', '9157a40a-e530-413f-863d-9df0ad1b679f');
-                formData.append('subject', 'Новый посетитель сайта - IP: ' + visitorIP);
-                formData.append('email', 'robertitbaev15@gmail.com');
-                formData.append('message', message);
-                formData.append('from_name', 'IP Tracker');
-
-                const response2 = await fetch('https://api.web3forms.com/submit', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response2.json();
-                if (result.success) {
-                    console.log('Email успешно отправлен!');
-                } else {
-                    console.error('Ошибка отправки:', result);
-                }
-                
-            } catch (error) {
-                console.error('Ошибка получения IP:', error);
-            }
-        }
-        
-        // Вызываем функцию при загрузке страницы
-        window.addEventListener('load', getIPAndSend);
-    </script>
-</body>
-</html>
-
+document.getElementById('lookupBtn').onclick = lookupByIP;
